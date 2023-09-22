@@ -23,6 +23,15 @@ typedef vector<pii> vpii;
 typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
+
+long long int power(long long x, long long y)   // x=2
+{
+    if(y==0) return 1;
+    if(y==1) return x;
+    if(y%2==0) return power( (x*x)%mod, y/2) % mod;
+    else return (x%mod)*(power( (x*x)%mod, y/2) ) % mod;
+}
+
 int main()
 {
 #ifndef ONLINE_JUDGE
@@ -33,24 +42,9 @@ int main()
     cin.tie(0);
     cout.tie(0);
     int n;
-    cin >> n;
-    if(n==1) cout<<1<<endl;
-    else if(n>1 && n<=3) cout<<"NO SOLUTION"<<endl;
-    else
-    {
-        int x1 = 1, x2=2;
-        while(x2<=n)
-        {
-            cout<<x2<<" ";
-            x2+=2;
-        }
-        while(x1<=n)
-        {
-            cout<<x1<<" ";
-            x1+=2;
-        }
+    cin >>n ;
+    long long int ans = power(2,n) % mod;
+    cout<< ans <<endl;
 
-    }
-    
     return 0;
 }

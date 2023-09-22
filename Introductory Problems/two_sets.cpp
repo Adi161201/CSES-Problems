@@ -23,6 +23,11 @@ typedef vector<pii> vpii;
 typedef vector<pl> vpl;
 typedef vector<vi> vvi;
 typedef vector<vl> vvl;
+
+
+vi taken;
+vi not_taken;
+
 int main()
 {
 #ifndef ONLINE_JUDGE
@@ -34,23 +39,31 @@ int main()
     cout.tie(0);
     int n;
     cin >> n;
-    if(n==1) cout<<1<<endl;
-    else if(n>1 && n<=3) cout<<"NO SOLUTION"<<endl;
+    
+    long long int sum=0;
+    for(int i=1;i<=n;i++) sum+=i;
+
+    if(sum%2 !=0) cout<<"NO"<<endl;
     else
     {
-        int x1 = 1, x2=2;
-        while(x2<=n)
+        int l=1, r=n;
+        long long int tar = sum/2;
+        for(int i=n;i>=1;i--)
         {
-            cout<<x2<<" ";
-            x2+=2;
+            if(i <=tar)
+            {
+                taken.push_back(i);
+                tar-=i;
+            }
+            else not_taken.push_back(i);
         }
-        while(x1<=n)
-        {
-            cout<<x1<<" ";
-            x1+=2;
-        }
-
+        cout<<"YES"<<endl;
+        cout<<taken.size()<<endl;
+        for(int i=0;i<taken.size();i++) cout<<taken[i]<<" ";
+        cout<<endl;
+        cout<<not_taken.size()<<endl;
+        for(int i=0;i<not_taken.size();i++) cout<<not_taken[i]<<" ";
+       
     }
-    
     return 0;
 }
